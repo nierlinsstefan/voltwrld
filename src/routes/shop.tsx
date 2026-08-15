@@ -1,11 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ProductGrid, matchesCategory, useProducts } from "@/components/ProductGrid";
 
-type ShopSearch = { category?: string };
+type ShopSearch = { category?: string | undefined };
 
 export const Route = createFileRoute("/shop")({
   validateSearch: (search: Record<string, unknown>): ShopSearch => ({
-    category: typeof search.category === "string" ? search.category : undefined,
+    category: typeof search["category"] === "string" ? (search["category"] as string) : undefined,
   }),
   head: () => ({
     meta: [
