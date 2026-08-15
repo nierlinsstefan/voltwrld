@@ -70,7 +70,7 @@ function Index() {
             <Link
               to="/shop"
               search={{}}
-              className="group inline-flex w-fit items-center gap-3 bg-primary px-8 py-4 text-[11px] font-semibold uppercase tracking-[0.24em] text-primary-foreground transition-opacity duration-300 hover:opacity-85"
+              className="group inline-flex w-fit items-center gap-3 text-[12px] font-bold uppercase tracking-[0.24em] text-foreground transition-opacity duration-300 hover:opacity-70"
             >
               Shop the collection
               <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
@@ -122,28 +122,21 @@ function Index() {
         </div>
       </section>
 
-      {/* Fitment */}
-      <section className="border-y border-border bg-surface">
-        <div className="mx-auto max-w-[1600px] px-5 py-20 sm:px-10 sm:py-28">
-          <p className="eyebrow">Fitment</p>
-          <h2 className="mt-4 max-w-3xl text-4xl uppercase sm:text-6xl">Built for electric</h2>
-          <p className="mt-6 max-w-xl text-sm leading-relaxed text-muted-foreground">
-            Engineered around Sur-Ron, Talaria and the light electric platforms that came after them. Torque figures
-            that punish cheap hardware, silent drivetrains that expose every rattle — our parts are specced for that.
-          </p>
-          <div className="mt-14 grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { k: "Sur-Ron", v: "Light Bee X / Ultra Bee" },
-              { k: "Talaria", v: "Sting / Sting R / XXX" },
-              { k: "22.2mm", v: "Standard bar fitment" },
-              { k: "48h", v: "Dispatch" },
-            ].map((s) => (
-              <div key={s.k} className="bg-surface p-8">
-                <p className="font-display text-2xl uppercase sm:text-3xl">{s.k}</p>
-                <p className="mt-2 text-xs text-muted-foreground">{s.v}</p>
-              </div>
-            ))}
-          </div>
+      {/* E-bike parts by model */}
+      <section className="mx-auto max-w-[1600px] px-5 pb-20 sm:px-10 sm:pb-28">
+        <p className="eyebrow">Parts by bike</p>
+        <div className="mt-8 flex flex-wrap gap-x-12 gap-y-6">
+          {BIKE_LIST.map((b) => (
+            <Link
+              key={b.slug}
+              to="/bikes/$slug"
+              params={{ slug: b.slug }}
+              className="group flex items-center gap-3 font-display text-3xl uppercase tracking-[-0.03em] transition-opacity duration-300 hover:opacity-70 sm:text-5xl"
+            >
+              {b.name}
+              <ArrowRight className="h-5 w-5 -translate-x-1 opacity-40 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100" />
+            </Link>
+          ))}
         </div>
       </section>
 
