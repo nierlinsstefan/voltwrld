@@ -1,24 +1,197 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
+import heroGrip from "@/assets/hero-grip.jpg";
+import editorial from "@/assets/editorial-1.jpg";
+import { ProductGrid, useProducts } from "@/components/ProductGrid";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "VOLTWRLD — Premium Monochrome Grips & Components" },
+      {
+        name: "description",
+        content:
+          "VOLTWRLD designs precision grips, accessories and components in a strict black-and-white language. Built for riders.",
+      },
+      { property: "og:title", content: "VOLTWRLD — Premium Monochrome Grips & Components" },
+      {
+        property: "og:description",
+        content: "Precision grips, accessories and components. Monochrome by design.",
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Marquee() {
+  const words = ["PRECISION", "MONOCHROME", "MADE TO RIDE", "NO COMPROMISE"];
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="overflow-hidden border-y border-border py-5">
+      <div className="animate-marquee flex w-max gap-12 whitespace-nowrap">
+        {Array.from({ length: 2 }).flatMap((_, r) =>
+          words.map((w) => (
+            <span key={`${r}-${w}`} className="eyebrow text-foreground/60">
+              {w} <span className="ml-12 text-foreground/25">/</span>
+            </span>
+          )),
+        )}
+      </div>
     </div>
+  );
+}
+
+function Index() {
+  const { data: products = [], isLoading } = useProducts();
+  const featured = products.slice(0, 4);
+
+  return (
+    <>
+      {/* Hero */}
+      <section className="relative flex min-h-[92vh] items-end overflow-hidden">
+        <img
+          src={heroGrip}
+          alt="VOLTWRLD matte black grip on a dark studio backdrop"
+          width={1600}
+          height={1200}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0" style={{ background: "var(--gradient-veil)" }} />
+        <div className="absolute inset-x-0 bottom-0 h-1/2" style={{ background: "var(--gradient-fade)" }} />
+
+        <div className="relative mx-auto w-full max-w-[1600px] px-5 pb-16 sm:px-10 sm:pb-24">
+          <p className="eyebrow animate-fade-up">Est. Monochrome</p>
+          <h1 className="display-xl mt-5 animate-fade-up text-[19vw] leading-[0.82] sm:text-[14vw] lg:text-[11rem]">
+            VOLTWRLD
+          </h1>
+          <div className="mt-8 flex animate-fade-up flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+            <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
+              Grips, accessories and components engineered around feel. Stripped back to black, white and the
+              geometry in between.
+            </p>
+            <Link
+              to="/shop"
+              search={{}}
+              className="group inline-flex w-fit items-center gap-3 bg-primary px-8 py-4 text-[11px] font-semibold uppercase tracking-[0.24em] text-primary-foreground transition-opacity duration-300 hover:opacity-85"
+            >
+              Shop the collection
+              <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <Marquee />
+
+      {/* Featured */}
+      <section className="mx-auto max-w-[1600px] px-5 py-20 sm:px-10 sm:py-28">
+        <div className="flex items-end justify-between gap-6">
+          <div>
+            <p className="eyebrow">Featured</p>
+            <h2 className="mt-3 text-4xl uppercase sm:text-6xl">Selected Pieces</h2>
+          </div>
+          <Link to="/shop" search={{}} className="link-underline hidden text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground hover:text-foreground sm:block">
+            View all
+          </Link>
+        </div>
+        <div className="mt-12">
+          <ProductGrid products={featured} isLoading={isLoading} />
+        </div>
+      </section>
+
+      {/* Categories */}
+      <section className="mx-auto max-w-[1600px] px-5 pb-20 sm:px-10 sm:pb-28">
+        <p className="eyebrow">Categories</p>
+        <div className="mt-8 grid gap-px bg-border sm:grid-cols-3">
+          {[
+            { label: "Grips", slug: "grips", copy: "Tuned compounds, precise knurl." },
+            { label: "Accessories", slug: "accessories", copy: "Bar ends, clamps, hardware." },
+            { label: "All Products", slug: "all", copy: "The complete VOLTWRLD range." },
+          ].map((c) => (
+            <Link
+              key={c.slug}
+              to="/shop"
+              search={c.slug === "all" ? {} : { category: c.slug }}
+              className="group relative flex min-h-[220px] flex-col justify-between bg-surface p-8 transition-colors duration-500 hover:bg-surface-elevated"
+            >
+              <span className="eyebrow">{c.copy}</span>
+              <span className="flex items-end justify-between">
+                <span className="font-display text-3xl uppercase tracking-[-0.03em] sm:text-4xl">{c.label}</span>
+                <ArrowRight className="h-5 w-5 -translate-x-1 opacity-40 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100" />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Editorial */}
+      <section className="grid items-stretch gap-px bg-border lg:grid-cols-2">
+        <img
+          src={editorial}
+          alt="Rider's gloved hands on VOLTWRLD grips"
+          loading="lazy"
+          width={1200}
+          height={1504}
+          className="h-full w-full object-cover"
+        />
+        <div className="flex flex-col justify-center bg-surface px-6 py-20 sm:px-16">
+          <p className="eyebrow">The Standard</p>
+          <h2 className="mt-4 text-4xl uppercase sm:text-5xl">Built around the hand</h2>
+          <p className="mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
+            Every VOLTWRLD component starts with a single question: how does it feel after four hours? Compounds,
+            diameters and patterns are tested until the answer stops changing.
+          </p>
+          <div className="mt-10 grid max-w-md grid-cols-3 gap-8 border-t border-border pt-8">
+            {[
+              { k: "Dual", v: "Compound" },
+              { k: "Lock", v: "On Clamps" },
+              { k: "48h", v: "Dispatch" },
+            ].map((s) => (
+              <div key={s.k}>
+                <p className="font-display text-2xl uppercase">{s.k}</p>
+                <p className="mt-1 text-xs text-muted-foreground">{s.v}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Instagram */}
+      <section id="instagram" className="mx-auto max-w-[1600px] px-5 py-20 sm:px-10 sm:py-28">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <p className="eyebrow">Social</p>
+            <h2 className="mt-3 text-4xl uppercase sm:text-6xl">@voltwrld</h2>
+          </div>
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noreferrer"
+            className="link-underline text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground hover:text-foreground"
+          >
+            Follow on Instagram
+          </a>
+        </div>
+
+        <div className="mt-10 grid grid-cols-2 gap-px bg-border sm:grid-cols-4">
+          {[heroGrip, editorial, editorial, heroGrip].map((src, i) => (
+            <a
+              key={i}
+              href="https://instagram.com"
+              target="_blank"
+              rel="noreferrer"
+              className="group relative aspect-square overflow-hidden bg-surface"
+            >
+              <img
+                src={src}
+                alt="VOLTWRLD on Instagram"
+                loading="lazy"
+                className="h-full w-full object-cover grayscale transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+              />
+              <span className="absolute inset-0 bg-background/50 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            </a>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
