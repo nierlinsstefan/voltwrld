@@ -1,8 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import heroGrip from "@/assets/hero-grip.jpg";
-import editorial from "@/assets/editorial-1.jpg";
 import { ProductGrid, useProducts } from "@/components/ProductGrid";
+import heroGrip from "@/assets/hero-grip.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -24,7 +23,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Marquee() {
-  const words = ["PRECISION", "MONOCHROME", "MADE TO RIDE", "NO COMPROMISE"];
+  const words = ["SUR-RON READY", "TALARIA FIT", "ELECTRIC BUILT", "NO COMPROMISE"];
   return (
     <div className="overflow-hidden border-y border-border py-5">
       <div className="animate-marquee flex w-max gap-12 whitespace-nowrap">
