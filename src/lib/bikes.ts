@@ -9,6 +9,45 @@ export interface Bike {
 
 export const BIKES: Bike[] = [
   {
+    slug: "surron",
+    name: "Sur-Ron",
+    tagline: "Light Bee X / Ultra Bee",
+    blurb:
+      "Grips, bar hardware and controls for Sur-Ron Light Bee X and Ultra Bee. Direct fit on stock 22.2mm bars.",
+    query: "surron",
+    specs: [
+      { k: "Bars", v: "22.2mm standard" },
+      { k: "Fit", v: "Light Bee X / Ultra Bee" },
+      { k: "Grips", v: "Lock-on compatible" },
+    ],
+  },
+  {
+    slug: "talaria",
+    name: "Talaria",
+    tagline: "Sting / XXX",
+    blurb:
+      "Replacement grips and finishing hardware for Talaria Sting and XXX builds. Built for hard riding.",
+    query: "talaria",
+    specs: [
+      { k: "Bars", v: "22.2mm standard" },
+      { k: "Fit", v: "Sting / XXX" },
+      { k: "Hardware", v: "Stainless clamps" },
+    ],
+  },
+  {
+    slug: "strike",
+    name: "Strike",
+    tagline: "Electric moto platform",
+    blurb:
+      "Parts and accessories that bolt straight onto Strike electric bikes — grips, clamps and bar ends.",
+    query: "strike",
+    specs: [
+      { k: "Bars", v: "22.2mm standard" },
+      { k: "Grips", v: "Single clamp" },
+      { k: "Dispatch", v: "48h" },
+    ],
+  },
+  {
     slug: "heybike-villain",
     name: "Heybike Villain",
     tagline: "Fat-tire moto build",

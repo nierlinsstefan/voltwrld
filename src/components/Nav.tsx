@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
-import { Menu, X } from "lucide-react";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { Menu, Search, X } from "lucide-react";
 import { Logo } from "./Logo";
 import { CartDrawer } from "./CartDrawer";
 import { BIKE_LIST } from "@/lib/bikes";
@@ -12,17 +12,35 @@ type NavLink = {
   params?: Record<string, string>;
 };
 
+const bikeLinks: NavLink[] = BIKE_LIST.map((b) => ({
+  label: b.name,
+  to: "/bikes/$slug",
+  params: { slug: b.slug },
+}));
+
 const links: NavLink[] = [
   { label: "Shop All", to: "/shop", search: {} },
   { label: "Grips", to: "/shop", search: { category: "grips" } },
   { label: "Accessories", to: "/shop", search: { category: "accessories" } },
-  ...BIKE_LIST.map((b) => ({ label: b.name, to: "/bikes/$slug", params: { slug: b.slug } })),
   { label: "Contact", to: "/contact", search: {} },
 ];
+
+const desktopLinks: NavLink[] = [...links.slice(0, 3), ...bikeLinks.slice(0, 3), links[3]!];
+const mobileLinks: NavLink[] = [...links.slice(0, 3), ...bikeLinks, links[3]!];
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+
+  const submitSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const q = query.trim();
+    if (!q) return;
+    setOpen(false);
+    navigate({ to: "/shop", search: { q } });
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -41,7 +59,7 @@ export function Nav() {
         <Logo />
 
         <div className="hidden items-center gap-7 lg:flex">
-          {links.map((l) => (
+          {desktopLinks.map((l) => (
             <Link
               key={l.label}
               to={l.to as never}
@@ -55,6 +73,19 @@ export function Nav() {
         </div>
 
         <div className="flex items-center gap-5">
+          <form
+            onSubmit={submitSearch}
+            className="hidden items-center gap-2 border-b border-border/70 pb-1 focus-within:border-foreground md:flex"
+          >
+            <Search className="h-4 w-4 text-muted-foreground" strokeWidth={1.4} />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="SEARCH"
+              aria-label="Search products"
+              className="w-28 bg-transparent text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground placeholder:text-muted-foreground focus:outline-none lg:w-40"
+            />
+          </form>
           <CartDrawer />
           <button
             className="lg:hidden"
@@ -69,7 +100,17 @@ export function Nav() {
       {open && (
         <div className="border-t border-border bg-background lg:hidden">
           <div className="flex flex-col px-5 py-4">
-            {links.map((l) => (
+            <form onSubmit={submitSearch} className="mb-3 flex items-center gap-2 border-b border-border pb-3">
+              <Search className="h-4 w-4 text-muted-foreground" strokeWidth={1.4} />
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="SEARCH PRODUCTS"
+                aria-label="Search products"
+                className="w-full bg-transparent text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground placeholder:text-muted-foreground focus:outline-none"
+              />
+            </form>
+            {mobileLinks.map((l) => (
               <Link
                 key={l.label}
                 to={l.to as never}
