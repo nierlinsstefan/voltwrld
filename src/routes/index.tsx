@@ -58,14 +58,14 @@ function Index() {
         <div className="absolute inset-x-0 bottom-0 h-1/2" style={{ background: "var(--gradient-fade)" }} />
 
         <div className="relative mx-auto w-full max-w-[1600px] px-5 pb-16 sm:px-10 sm:pb-24">
-          <p className="eyebrow animate-fade-up">Est. Monochrome</p>
+          <p className="eyebrow animate-fade-up">Electric Performance Parts</p>
           <h1 className="display-xl mt-5 animate-fade-up text-[19vw] leading-[0.82] sm:text-[14vw] lg:text-[11rem]">
             VOLTWRLD
           </h1>
           <div className="mt-8 flex animate-fade-up flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
             <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
-              Grips, accessories and components engineered around feel. Stripped back to black, white and the
-              geometry in between.
+              Grips, controls and hardware for Sur-Ron, Talaria and light electric builds. Stripped back to black,
+              white and the geometry in between.
             </p>
             <Link
               to="/shop"
