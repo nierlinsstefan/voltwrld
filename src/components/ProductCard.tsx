@@ -54,7 +54,7 @@ export function ProductCard({ product, index = 0 }: { product: ShopifyProduct; i
           <button
             onClick={handleAddToCart}
             disabled={isLoading || !variant?.availableForSale}
-            className="flex w-full items-center justify-center gap-2 bg-primary py-3.5 text-[11px] font-semibold uppercase tracking-[0.24em] text-primary-foreground transition-opacity duration-300 hover:opacity-85 disabled:opacity-50"
+            className="flex w-full items-center justify-center gap-2 bg-background/85 py-3.5 text-[11px] font-semibold uppercase tracking-[0.24em] text-foreground backdrop-blur-sm transition-opacity duration-300 hover:opacity-80 disabled:opacity-50"
           >
             {isLoading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : variant?.availableForSale ? "Add to Bag" : "Sold Out"}
           </button>

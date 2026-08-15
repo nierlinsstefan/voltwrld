@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { ProductGrid, useProducts } from "@/components/ProductGrid";
+import { BIKE_LIST } from "@/lib/bikes";
 import heroGrip from "@/assets/hero-grip.jpg";
 
 export const Route = createFileRoute("/")({
