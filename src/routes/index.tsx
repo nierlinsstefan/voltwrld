@@ -122,32 +122,25 @@ function Index() {
         </div>
       </section>
 
-      {/* Editorial */}
-      <section className="grid items-stretch gap-px bg-border lg:grid-cols-2">
-        <img
-          src={editorial}
-          alt="Rider's gloved hands on VOLTWRLD grips"
-          loading="lazy"
-          width={1200}
-          height={1504}
-          className="h-full w-full object-cover"
-        />
-        <div className="flex flex-col justify-center bg-surface px-6 py-20 sm:px-16">
-          <p className="eyebrow">The Standard</p>
-          <h2 className="mt-4 text-4xl uppercase sm:text-5xl">Built around the hand</h2>
-          <p className="mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
-            Every VOLTWRLD component starts with a single question: how does it feel after four hours? Compounds,
-            diameters and patterns are tested until the answer stops changing.
+      {/* Fitment */}
+      <section className="border-y border-border bg-surface">
+        <div className="mx-auto max-w-[1600px] px-5 py-20 sm:px-10 sm:py-28">
+          <p className="eyebrow">Fitment</p>
+          <h2 className="mt-4 max-w-3xl text-4xl uppercase sm:text-6xl">Built for electric</h2>
+          <p className="mt-6 max-w-xl text-sm leading-relaxed text-muted-foreground">
+            Engineered around Sur-Ron, Talaria and the light electric platforms that came after them. Torque figures
+            that punish cheap hardware, silent drivetrains that expose every rattle — our parts are specced for that.
           </p>
-          <div className="mt-10 grid max-w-md grid-cols-3 gap-8 border-t border-border pt-8">
+          <div className="mt-14 grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { k: "Dual", v: "Compound" },
-              { k: "Lock", v: "On Clamps" },
+              { k: "Sur-Ron", v: "Light Bee X / Ultra Bee" },
+              { k: "Talaria", v: "Sting / Sting R / XXX" },
+              { k: "22.2mm", v: "Standard bar fitment" },
               { k: "48h", v: "Dispatch" },
             ].map((s) => (
-              <div key={s.k}>
-                <p className="font-display text-2xl uppercase">{s.k}</p>
-                <p className="mt-1 text-xs text-muted-foreground">{s.v}</p>
+              <div key={s.k} className="bg-surface p-8">
+                <p className="font-display text-2xl uppercase sm:text-3xl">{s.k}</p>
+                <p className="mt-2 text-xs text-muted-foreground">{s.v}</p>
               </div>
             ))}
           </div>
@@ -171,25 +164,9 @@ function Index() {
           </a>
         </div>
 
-        <div className="mt-10 grid grid-cols-2 gap-px bg-border sm:grid-cols-4">
-          {[heroGrip, editorial, editorial, heroGrip].map((src, i) => (
-            <a
-              key={i}
-              href="https://instagram.com"
-              target="_blank"
-              rel="noreferrer"
-              className="group relative aspect-square overflow-hidden bg-surface"
-            >
-              <img
-                src={src}
-                alt="VOLTWRLD on Instagram"
-                loading="lazy"
-                className="h-full w-full object-cover grayscale transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
-              />
-              <span className="absolute inset-0 bg-background/50 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            </a>
-          ))}
-        </div>
+        <p className="mt-8 max-w-xl text-sm leading-relaxed text-muted-foreground">
+          Build photos, fitment guides and drops from the Sur-Ron and Talaria community.
+        </p>
       </section>
     </>
   );
