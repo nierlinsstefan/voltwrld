@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { ProductGrid, useProducts } from "@/components/ProductGrid";
 import { BIKE_LIST } from "@/lib/bikes";
-import heroGrip from "@/assets/hero-grip.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -47,26 +46,18 @@ function Index() {
   return (
     <>
       {/* Hero */}
-      <section className="relative flex min-h-[92vh] items-end overflow-hidden">
-        <img
-          src={heroGrip}
-          alt="VOLTWRLD matte black grip on a dark studio backdrop"
-          width={1600}
-          height={1200}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
+      <section className="relative flex min-h-[80vh] items-end overflow-hidden">
         <div className="absolute inset-0" style={{ background: "var(--gradient-veil)" }} />
         <div className="absolute inset-x-0 bottom-0 h-1/2" style={{ background: "var(--gradient-fade)" }} />
 
         <div className="relative mx-auto w-full max-w-[1600px] px-5 pb-16 sm:px-10 sm:pb-24">
           <p className="eyebrow animate-fade-up">Electric Performance Parts</p>
-          <h1 className="display-xl mt-5 animate-fade-up text-[19vw] leading-[0.82] sm:text-[14vw] lg:text-[11rem]">
+          <h1 className="display-xl mt-5 w-full animate-fade-up text-[clamp(2.5rem,15vw,11rem)] leading-[0.85] break-words">
             VOLTWRLD
           </h1>
           <div className="mt-8 flex animate-fade-up flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
             <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
-              Grips, controls and hardware for Sur-Ron, Talaria and light electric builds. Stripped back to black,
-              white and the geometry in between.
+              Grips, controls and hardware for Sur-Ron, Talaria and light electric builds.
             </p>
             <Link
               to="/shop"
