@@ -48,10 +48,8 @@ function ShopPage() {
               key={f.label}
               to="/shop"
               search={f.slug ? { category: f.slug } : {}}
-              className={`border px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] transition-colors duration-300 ${
-                active
-                  ? "border-foreground bg-primary text-primary-foreground"
-                  : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
+              className={`text-[11px] font-semibold uppercase tracking-[0.2em] transition-opacity duration-300 hover:opacity-70 ${
+                active ? "text-foreground underline underline-offset-8" : "text-muted-foreground"
               }`}
             >
               {f.label}

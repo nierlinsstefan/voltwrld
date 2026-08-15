@@ -75,7 +75,7 @@ export function CartDrawer() {
                         {formatPrice(item.price.amount, item.price.currencyCode)}
                       </p>
                       <div className="mt-3 flex items-center gap-3">
-                        <div className="flex items-center border border-border">
+                        <div className="flex items-center gap-1">
                           <button
                             className="p-1.5 text-muted-foreground transition-colors hover:text-foreground"
                             onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
@@ -114,7 +114,7 @@ export function CartDrawer() {
                 <button
                   onClick={handleCheckout}
                   disabled={items.length === 0 || isLoading || isSyncing}
-                  className="flex w-full items-center justify-center gap-2 bg-primary px-6 py-4 text-xs font-semibold uppercase tracking-[0.24em] text-primary-foreground transition-opacity duration-300 hover:opacity-80 disabled:opacity-50"
+                  className="flex w-full items-center justify-center gap-2 py-4 text-xs font-bold uppercase tracking-[0.24em] text-foreground underline underline-offset-8 transition-opacity duration-300 hover:opacity-70 disabled:opacity-50"
                 >
                   {isLoading || isSyncing ? (
                     <Loader2 className="h-4 w-4 animate-spin" />

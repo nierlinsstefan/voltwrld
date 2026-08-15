@@ -48,7 +48,7 @@ function ContactPage() {
           </div>
           <button
             type="submit"
-            className="bg-primary px-10 py-4 text-[11px] font-semibold uppercase tracking-[0.24em] text-primary-foreground transition-opacity duration-300 hover:opacity-85"
+            className="w-fit text-[12px] font-bold uppercase tracking-[0.24em] text-foreground underline underline-offset-8 transition-opacity duration-300 hover:opacity-70"
           >
             Send message
           </button>
@@ -70,13 +70,13 @@ function ContactPage() {
           <div>
             <p className="eyebrow">Social</p>
             <div className="mt-4 flex gap-4">
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="border border-border p-3 transition-colors duration-300 hover:bg-accent">
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="p-1 transition-opacity duration-300 hover:opacity-60">
                 <Instagram className="h-4 w-4" strokeWidth={1.4} />
               </a>
-              <a href="https://youtube.com" target="_blank" rel="noreferrer" aria-label="YouTube" className="border border-border p-3 transition-colors duration-300 hover:bg-accent">
+              <a href="https://youtube.com" target="_blank" rel="noreferrer" aria-label="YouTube" className="p-1 transition-opacity duration-300 hover:opacity-60">
                 <Youtube className="h-4 w-4" strokeWidth={1.4} />
               </a>
-              <a href="mailto:hello@voltwrld.com" aria-label="Email" className="border border-border p-3 transition-colors duration-300 hover:bg-accent">
+              <a href="mailto:hello@voltwrld.com" aria-label="Email" className="p-1 transition-opacity duration-300 hover:opacity-60">
                 <Mail className="h-4 w-4" strokeWidth={1.4} />
               </a>
             </div>
