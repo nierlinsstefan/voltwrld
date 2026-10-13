@@ -1,4 +1,5 @@
-import { describe, expect, test } from "bun:test";
+import { describe, test } from "node:test";
+import { strict as assert } from "node:assert";
 import { getVariantImage } from "./product-images";
 import type { ShopifyProduct } from "./shopify";
 
@@ -12,7 +13,7 @@ const product: ShopifyProduct = {
     ] },
     variants: { edges: [
       { node: { id: "standard", title: "Surron Twist Throttle", price: { amount: "29.99", currencyCode: "USD" }, availableForSale: true, selectedOptions: [{ name: "Style", value: "Surron Twist Throttle" }] } },
-      { node: { id: "carbon", title: "Carbon Surron Twist Throttle", price: { amount: "32.99", currencyCode: "USD" }, availableForSale: true, selectedOptions: [{ name: "Style", value: "Carbon Surron Twist Throttle" }] } },
+      { node: { id: "carbon", title: "Carbon Surron Twist Throttle", image: { url: "first-photo.webp", altText: "Surron Twist Throttle" }, price: { amount: "32.99", currencyCode: "USD" }, availableForSale: true, selectedOptions: [{ name: "Style", value: "Carbon Surron Twist Throttle" }] } },
     ] },
     options: [{ name: "Style", values: ["Surron Twist Throttle", "Carbon Surron Twist Throttle"] }],
   },
@@ -20,9 +21,9 @@ const product: ShopifyProduct = {
 
 describe("throttle option photos", () => {
   test("standard selects the first uploaded photo", () => {
-    expect(getVariantImage(product, product.node.variants.edges[0]?.node)?.url).toBe("first-photo.webp");
+    assert.equal(getVariantImage(product, product.node.variants.edges[0]?.node)?.url, "first-photo.webp");
   });
   test("carbon selects the second uploaded photo", () => {
-    expect(getVariantImage(product, product.node.variants.edges[1]?.node)?.url).toBe("second-photo.png");
+    assert.equal(getVariantImage(product, product.node.variants.edges[1]?.node)?.url, "second-photo.png");
   });
 });

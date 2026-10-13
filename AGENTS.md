@@ -9,4 +9,4 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- Resolve option photos through the shared product-image helper, preferring Shopify variant images and then exact option/variant labels in photo alt text, so product selection and shopping bag images agree.
+- Resolve option photos through the shared product-image helper, preferring exact option/variant labels in photo alt text before Shopify variant images (which may inherit the default photo), so product selection and shopping bag images agree.
