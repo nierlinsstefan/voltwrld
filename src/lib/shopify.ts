@@ -20,6 +20,7 @@ export interface ShopifyProduct {
         node: {
           id: string;
           title: string;
+          image?: { url: string; altText: string | null } | null;
           price: { amount: string; currencyCode: string };
           availableForSale: boolean;
           selectedOptions: Array<{ name: string; value: string }>;
@@ -48,6 +49,7 @@ export const STOREFRONT_QUERY = `
               node {
                 id
                 title
+                image { url altText }
                 price { amount currencyCode }
                 availableForSale
                 selectedOptions { name value }

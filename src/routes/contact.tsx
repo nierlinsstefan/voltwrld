@@ -5,6 +5,8 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — VOLTWRLD" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       {
         name: "description",
         content: "Get in touch with VOLTWRLD for support, wholesale enquiries, team riding and press.",

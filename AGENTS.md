@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Resolve option photos through the shared product-image helper, preferring Shopify variant images and then exact option/variant labels in photo alt text, so product selection and shopping bag images agree.

@@ -6,6 +6,8 @@ import { toast } from "sonner";
 import { fetchProducts, formatPrice, type ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { ProductCard } from "@/components/ProductCard";
+import { Button } from "@/components/ui/button";
+import { getVariantImage } from "@/lib/product-images";
 
 export const Route = createFileRoute("/product/$handle")({
   head: ({ params }) => {
@@ -16,6 +18,8 @@ export const Route = createFileRoute("/product/$handle")({
         { name: "description", content: `${name} by VOLTWRLD. Premium monochrome components built for riders.` },
         { property: "og:title", content: `${name} — VOLTWRLD` },
         { property: "og:description", content: `${name} by VOLTWRLD. Premium monochrome components.` },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
       ],
     };
   },
@@ -82,6 +86,13 @@ function Detail({ product }: { product: ShopifyProduct }) {
 
   const variant = useMemo(() => variants.find((v) => v.id === variantId) ?? variants[0], [variants, variantId]);
   const images = node.images.edges;
+  const selectVariant = (id: string) => {
+    setVariantId(id);
+    const selected = variants.find((candidate) => candidate.id === id);
+    const image = getVariantImage(product, selected);
+    const index = images.findIndex(({ node: candidate }) => candidate.url === image?.url);
+    setActiveImage(index >= 0 ? index : 0);
+  };
 
   const handleAdd = async () => {
     if (!variant) return;
@@ -159,18 +170,20 @@ function Detail({ product }: { product: ShopifyProduct }) {
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
               {variants.map((v) => (
-                <button
+                 <Button
+                   variant="link"
                   key={v.id}
-                  onClick={() => setVariantId(v.id)}
+                   onClick={() => selectVariant(v.id)}
+                   aria-pressed={v.id === variantId}
                   disabled={!v.availableForSale}
-                  className={`px-1 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] transition-opacity duration-300 hover:opacity-70 disabled:opacity-35 ${
+                   className={`h-auto max-w-full whitespace-normal rounded-none px-1 py-2 text-left text-[11px] font-semibold uppercase tracking-[0.2em] transition-opacity duration-300 hover:opacity-70 disabled:opacity-35 ${
                     v.id === variantId
                       ? "text-foreground underline underline-offset-8"
                       : "text-muted-foreground"
                   }`}
                 >
                   {v.title}
-                </button>
+                 </Button>
               ))}
             </div>
           </div>
