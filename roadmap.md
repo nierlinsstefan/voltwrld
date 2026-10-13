@@ -1,0 +1,3 @@
+- [x] Create one throttle product with two options, supplied photos, and $29.99 / $32.99 prices.
+- [x] Switch the product and shopping bag photos to the selected option.
+- [x] Verify both options and availability on Shop All and every bike page.

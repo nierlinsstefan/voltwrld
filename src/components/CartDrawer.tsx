@@ -3,6 +3,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTr
 import { ShoppingBag, Minus, Plus, Trash2, Loader2, ArrowUpRight } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { formatPrice } from "@/lib/shopify";
+import { getVariantImage } from "@/lib/product-images";
 
 export function CartDrawer() {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,7 +60,7 @@ export function CartDrawer() {
                     <div className="h-24 w-20 flex-shrink-0 overflow-hidden bg-surface-elevated">
                       {item.product.node.images?.edges?.[0]?.node && (
                         <img
-                          src={item.product.node.images.edges[0].node.url}
+                           src={getVariantImage(item.product, item.product.node.variants.edges.find(({ node }) => node.id === item.variantId)?.node)?.url}
                           alt={item.product.node.title}
                           className="h-full w-full object-cover"
                           loading="lazy"

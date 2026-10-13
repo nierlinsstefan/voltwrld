@@ -11,6 +11,8 @@ export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
       { title: "Shop All — VOLTWRLD" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       {
         name: "description",
         content: "Browse the full VOLTWRLD range of grips, accessories and components in monochrome.",
