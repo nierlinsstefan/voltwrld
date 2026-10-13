@@ -121,7 +121,7 @@ function Detail({ product }: { product: ShopifyProduct }) {
             <img
               src={images[activeImage].node.url}
               alt={images[activeImage].node.altText ?? node.title}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-contain"
             />
           )}
         </div>
@@ -136,7 +136,7 @@ function Detail({ product }: { product: ShopifyProduct }) {
                 }`}
                 aria-label={`View image ${i + 1}`}
               >
-                <img src={img.node.url} alt="" className="h-full w-full object-cover" loading="lazy" />
+                <img src={img.node.url} alt="" className="h-full w-full object-contain" loading="lazy" />
               </button>
             ))}
           </div>
